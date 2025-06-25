@@ -84,7 +84,7 @@ if (countSaveBtn) {
             localStorage.setItem('randomBoxCount', newCount);
             countForm.style.display = 'none';
             document.body.classList.remove('count-setting-active');
-            showNotification(`已设置随机盒子数量为: ${newCount}`);
+            showNotification(`已设置随机词条数量为: ${newCount}`);
         } else {
             alert('请输入1-20之间的有效数字');
             randomCountInput.value = randomBoxCount;
@@ -358,7 +358,7 @@ addBox.addEventListener('click', function() {
         if (boxes.length === 0) return;
         
         // 确认清空
-        if (confirm('确定要删除所有盒子吗？')) {
+        if (confirm('确定要删除所有词条吗？')) {
             // 清空DOM
             boxes.forEach(box => box.remove());
             
