@@ -6,410 +6,151 @@
 
 body {
     overflow: hidden;
-    height: 100vh;
-    position: relative;
-    padding-top: 60px; /* 为导航栏留出空间 */
 }
 
-.box {
-    position: absolute;
-    width: auto;
-    height: auto;
-    padding: 15px;
-    background-color: #3498db;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.notification {
-    position: fixed;
-    top: 70px; /* 导航栏高度60px + 10px间距 */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    z-index: 1000;
-    animation: fadeInOut 3s ease-in-out;
-    font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .box {
-        font-size: 16px;
-        padding: 10px;
-        max-width: 80%;
-    }
-}
-
-.box:hover,
-.box:active {
-    transform: scale(1.5);
-    z-index: 10;
-}
-
-/* 移动端触摸反馈优化 */
-@media (max-width: 768px) {
-    .box:hover,
-    .box:active {
-        transform: scale(1.3);
-    }
-}
-
-.modal {
-    position: absolute;
-    display: none;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    position: relative;
-    width: auto;
-    max-width: 90%;
-    min-width: 250px;
-    z-index: 1020;
-    max-height: 70vh;
-    overflow-y: auto;
-    white-space: pre-line; /* 保留换行符 */
-}
-
-@media (max-width: 768px) {
-    .modal-content {
-        max-width: 85%;
-        padding: 15px;
-        max-height: 60vh;
-    }
-}
-
-.close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 30px;
-    height: 30px;
-    background-color: #3498db;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1001; /* 确保关闭按钮在表单上方 */
-}
-
-.blur-background .box:not(.selected) {
-    filter: blur(5px);
-    opacity: 0.5;
-}
-
-.selected {
-    transform: scale(1.2);
-    z-index: 1010;
-}
-
-/* 控制按钮样式 */
-.controls {
-    display: flex;
-    gap: 10px;
-    height: 100%;
-    align-items: center;
-}
-
-/* 删除和清空按钮样式 */
-.control-box.delete-box {
-    background-color: #e74c3c;
-}
-
-.control-box.clear-box {
-    background-color: #e67e22;
-}
-
-/* 随机数量控制样式 */
-.control-group {
-    display: flex;
-    gap: 10px;
-}
-
-.random-count-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.count-input {
-    width: 50px;
-    height: 40px;
-    padding: 5px;
-    border: none;
-    text-align: center;
-    font-size: 16px;
-    background-color: transparent;
-    color: white;
-}
-
-/* 随机数量控制样式 */
-.control-group.random-count-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.count-input-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.count-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
-}
-
-/* 调整数字输入框样式以匹配控制按钮 */
-.control-box.count-setting-box {
-    background-color: #3498db;
-}
-
-
-/* 数量设置模态框样式 */
-.add-form.count-form {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    position: relative;
-}
-
-/* 禁用状态样式 */
-.control-box.count-setting-box.disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: scale(1);
-    box-shadow: none;
-}
-
-/* 禁用状态样式 */
-.control-box.count-setting-box.disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: scale(1);
-    box-shadow: none;
-}
-
-.count-modal .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 300px;
-    text-align: center;
-}
-
-.count-modal h3 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.count-modal .count-input {
-    width: 80px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.count-modal .save-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 15px;
-    font-size: 16px;
-}
-
-.count-modal .save-btn:hover {
-    background-color: #2980b9;
-}
-
-/* 数量设置按钮样式 */
-.control-box.count-setting-box {
-    background-color: #9b59b6;
-}
-
-
-/* 保存按钮样式 */
-.control-box.save-count-box {
-    background-color: #2ecc71;
-}
-
-.control-box.save-count-box:hover {
-    background-color: #27ae60;
-}
-
-/* 盒子容器样式 */
-#boxContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: calc(100vh - 60px); /* 减去导航栏高度 */
-}
-
-/* 盒子容器样式 */
-#boxContainer {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 60px); /* 减去导航栏高度 */
-    padding-top: 20px; /* 额外顶部间距 */
-    overflow: hidden;
-}
-
-/* 导航栏样式 */
-.navbar {
+.nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background-color: #ffffff;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-    z-index: 3000;
 }
 
-/* 说明按钮样式 */
-.control-box.info-box {
-    background-color: #1abc9c;
+.main {
+    background-color: beige;
+
 }
 
-/* 数量设置按钮激活状态 */
-.count-setting-active .control-box.count-setting-box {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+.contr {
+    height: auto;
+    width: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
-.save-count-btn:hover {
-    background-color: #45a049;
+/* 功能按钮全局设置 */
+.contr>div {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgb(151, 151, 151);
 }
 
+/* 悬停和点击的动画 */
+.contr>div:hover,
+main>.word:hover {
+    transform: scale(1.2);
+    /* 缩放 */
+    transition: transform 0.3s ease;
+    /* 平滑动画 */
+}
 
-/* 删除叉号样式 */
-.box .delete-x {
+.inf-box {
+    background-color: red;
+}
+
+.add-box {
+    background-color: orange;
+
+}
+
+.ran-box {
+    background-color: rgb(234, 234, 31);
+}
+
+.cou-box {
+    background-color: green;
+}
+
+.del-box {
+    background-color: aqua;
+}
+
+.cle-box {
+    background-color: blue;
+}
+
+.theme-box {
+    background-color: purple;
+}
+
+main {
+    height: 100vh;
+    background-color: rgb(244, 249, 247);
+    position: relative;
+    margin-top: 50px;
+    z-index: 100;
+}
+
+/* 模态框、添加框、词条正文全局设置 */
+.mod,
+.add,
+.content,
+.cou {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 24px;
-    height: 24px;
-    background-color: #ff4444;
-    color: white;
-    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    height: auto;
+    width: auto;
+    z-index: 1000;
+    border: solid gray;
+    box-shadow: 2px 2px 5px gray;
+    padding: 30px;
+    margin: auto;
     display: none;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.box.delete-mode .delete-x {
-    display: flex;
-}
 
-/* 删除模式激活时的样式 */
-.delete-active .delete-box {
-    background-color: #cc0000;
-    transform: scale(1.05);
-}
-
-.control-box {
-    width: 60px;
-    height: 60px;
-    background-color: #2ecc71;
+/* 说明功能 */
+.clo-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -11px;
+    top: -11px;
+    background-color: #45adf2;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-    transition: transform 0.2;
 }
 
-.control-box.random-box {
-    background-color: #f39c12;
+/* 添加功能 */
+.add {
+    z-index: 900;
 }
 
-.control-box:hover {
-    transform: scale(1.1);
-}
-
-/* 添加表单样式 */
-.add-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 3000;
-    display: none;
-}
-
-.add-form input,
-.add-form textarea {
+.text-input,
+.area-input,
+.cou-input {
     width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
     border: 1px solid #ddd;
+    margin-bottom: 15px;
     border-radius: 5px;
+    padding: 10px;
     font-size: 16px;
 }
 
-.add-form textarea {
+.area-input {
     height: 150px;
     resize: vertical;
+    /* 设置只能高度变化 */
 }
 
-.add-form button {
-    background-color: #3498db;
+.sub-btn,
+.ser-btn {
+    background-color: #45adf2;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -418,6 +159,43 @@ body {
     font-size: 16px;
 }
 
-.add-form button:hover {
-    background-color: #2980b9;
+.word {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 15px;
+    background-color: #45adf2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3 ease;
+    box-shadow: 2px 2px 5px gray;
+}
+
+.cou-box.disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: scale(1);
+    box-shadow: none;
+}
+
+.clobtn {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -10px;   
+    top: -10px;    
+    background-color: #e93114;
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
 }
