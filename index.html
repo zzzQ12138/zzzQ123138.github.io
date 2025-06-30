@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>the pool</title>
-    <link rel="stylesheet" href="/zzzQ123138.github.io/style.css">
+    <title>The Pool - 随机笔记与灵感管理工具</title>
+    <link rel="stylesheet" href="restyle.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="controls">
-        <div class="control-box info-box">说明</div>
-        <div class="control-box add-box">添加</div>
-        <div class="control-box random-box">随机</div>
-        <div class="control-box count-setting-box">数量</div>
-        <div class="control-box delete-box">删除</div>
-        <div class="control-box clear-box">清空</div>
-    </div>
-    </nav>
-    <div id="boxContainer" class="container"></div>
-    <!-- 添加表单 -->
-    <div id="addForm" class="add-form">
-    <span class="close-btn" id="addFormClose">&times;</span>
-        <input type="text" id="textInput" placeholder="输入标题">
-        <textarea id="modalTextInput" placeholder="输入内容"></textarea>
-        <button id="submitBtn">提交</button>
-    </div>
-    <!-- 数量设置表单 -->
-    <div id="countForm" class="add-form">
-    <span class="close-btn" id="countFormClose">&times;</span>
-        <input type="number" id="randomCountInput" min="1" value="5" class="text-input">
-        <button id="countSaveBtn" class="submit-btn">保存</button>
-    </div>
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeBtn">&times;</span>
-            <p id="modalText"></p>
+    <nav class="nav">
+        <div class="contr">
+            <div class="inf-box" id="inf-box">说明</div>
+            <div class="add-box" id="add-box">添加</div>
+            <div class="ran-box" id="ran-box">随机</div>
+            <div class="cou-box" id="cou-box">数量</div>
+            <div class="del-box" id="del-box">删除</div>
+            <div class="cle-box" id="cle-box">清空</div>
+            <div class="theme-box" id="theme-box">主题</div>
         </div>
-    </div>
-    <script src="/zzzQ123138.github.io/script.js"></script>
+    </nav>
+    <main>
+        <div class="mod" id="mod">
+            <div class="mod-con">
+                <p id="mod-text"></p>
+            </div>
+            <span class="clo-btn" id="clo-btn"> &times; </span>
+        </div>
+        <div class="add" id="add">
+            <input type="text" class="text-input" id="text-input" placeholder="输入标题">
+            <textarea class="area-input" id="area-input" placeholder="输入内容"></textarea>
+            <button class="sub-btn" id="sub-btn">添加</button>
+            <span class="clo-btn" id="re-clo-btn"> &times; </span>
+        </div>
+        <div class="cou" id="cou">
+            <input type="number" class="cou-input" id="cou-input" value="5">
+            <button class="ser-btn" id="ser-btn">保存</button>
+            <span class="clo-btn" id="se-clo-btn"> &times; </span>
+        </div>
+    </main>
+
+    <script src="rescript.js"></script>
 </body>
+
 </html>
